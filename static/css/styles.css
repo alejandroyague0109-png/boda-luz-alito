@@ -25,76 +25,103 @@ body {
     line-height: 1.6;
     overflow-x: hidden;
 }
-
 /* =========================================
-   NUEVA PORTADA APILADA
+   NUEVA PORTADA SUPERPUESTA (CON ARCO)
    ========================================= */
 
-.hero {
-    /* Actúa como un pequeño espaciador inicial */
-    height: 10px; 
-    margin-bottom: 2rem;
-}
-
-.portada-apilada-header {
-    text-align: center;
-    padding: 2rem 1rem;
-}
-
-.portada-title-script {
-    font-family: var(--font-script);
-    font-size: 5rem;
-    color: var(--primary-navy);
-    margin: 0;
-    font-weight: normal;
-}
-
-.portada-apilada-foto-container {
+.hero-superpuesta {
+    position: relative;
     width: 100%;
-    max-width: 900px;
-    margin: 0 auto;
+    max-width: 900px; /* Mantiene la armonía en pantallas gigantes */
+    height: 85vh; /* Ocupa el 85% de la altura de la pantalla */
+    margin: 0 auto 3rem auto;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     overflow: hidden;
 }
 
-.portada-foto-harmonized {
+/* La imagen pasa al fondo */
+.hero-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
-    height: auto;
+    height: 100%;
     object-fit: cover;
-    display: block;
-    
-    /* Efectos de integración armónica */
+    z-index: 1;
+    /* Mantiene los bordes armónicos que ya tenías */
     border-radius: 10px;
     mask-image: radial-gradient(circle, black 70%, transparent 100%);
     -webkit-mask-image: radial-gradient(circle, black 70%, transparent 100%);
 }
 
-.portada-apilada-footer {
+/* Oscurece un poquito los bordes para resaltar el texto blanco */
+.hero-overlay-sutil {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: radial-gradient(circle, rgba(0,0,0,0) 20%, rgba(26, 46, 68, 0.4) 100%);
+    z-index: 2;
+    border-radius: 10px;
+}
+
+/* Contenedor principal de texto */
+.hero-content-superpuesto {
+    position: relative;
+    z-index: 3;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* Empuja el top arriba y el bottom abajo */
+    padding: 3rem 1rem;
     text-align: center;
-    padding: 3rem 1rem 1rem 1rem;
-    background-color: var(--bg-white);
+    color: #FCFCFC; /* Texto Blanco */
 }
 
-.portada-names-box {
-    display: inline-block;
-    border: 1px solid var(--accent-cyan);
-    padding: 1rem 2.5rem;
+/* Bloque Superior */
+.hero-top {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 2rem;
+}
+
+.svg-arco {
+    width: 100%;
+    max-width: 350px;
+    height: 130px;
+    overflow: visible;
+    margin-bottom: -30px; /* Acerca los nombres al arco */
+}
+
+.texto-arco {
+    font-family: var(--font-script);
+    font-size: 3.5rem;
+    fill: #FCFCFC;
+    /* Sombra sutil para despegar las letras de la foto */
+    filter: drop-shadow(2px 2px 4px rgba(0,0,0,0.5)); 
+}
+
+.hero-nombres-super {
     font-family: var(--font-serif);
+    font-size: 3rem;
+    letter-spacing: 0.3rem;
     text-transform: uppercase;
-    letter-spacing: 0.4rem;
-    font-size: 1.2rem;
-    background-color: white; 
-    color: var(--primary-navy);
+    text-shadow: 2px 2px 8px rgba(0,0,0,0.6);
 }
 
-.portada-date-formal {
+/* Bloque Inferior */
+.hero-bottom {
+    margin-bottom: 3rem;
+}
+
+.hero-fecha-super {
     font-family: var(--font-serif);
-    font-size: 1.8rem;
-    letter-spacing: 0.2rem;
-    color: var(--text-body);
-    margin-top: 1.5rem;
-    margin-bottom: 0;
+    font-size: 2rem;
+    letter-spacing: 0.4rem;
+    margin: 0;
+    text-shadow: 2px 2px 8px rgba(0,0,0,0.6);
 }
 
 /* =========================================
@@ -293,23 +320,25 @@ input:focus, textarea:focus, select:focus {
    ========================================= */
 @media (max-width: 600px) {
     
-    /* Ajustes Portada Apilada */
-    .portada-title-script {
-        font-size: 3.8rem; 
+   /* Ajustes Portada Superpuesta Mobile */
+    .hero-superpuesta {
+        height: 80vh; 
     }
-    
-    .portada-apilada-foto-container {
-        width: 92%; 
+    .svg-arco {
+        max-width: 280px;
+        height: 100px;
+        margin-bottom: -20px;
     }
-
-    .portada-names-box {
-        padding: 0.8rem 1.5rem;
-        font-size: 1rem;
+    .texto-arco {
+        font-size: 2.8rem;
+    }
+    .hero-nombres-super {
+        font-size: 2rem;
         letter-spacing: 0.2rem;
     }
-    
-    .portada-date-formal {
+    .hero-fecha-super {
         font-size: 1.5rem;
+        letter-spacing: 0.3rem;
     }
 
     /* Reducimos márgenes generales */
