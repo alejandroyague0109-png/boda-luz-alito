@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Luz & Alito | 15.08.2026</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Great+Vibes&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="/static/css/styles.css">
+</head>
+<body>
+
+    <header class="hero">
+        </header>
+
+    <div class="portada-apilada-header">
+        <h1 class="portada-title-script">Nuestra Boda</h1>
+    </div>
+
+    <div class="portada-apilada-foto-container">
+        <img src="/static/img/image_1.jpg" alt="Luz y Alito Preboda" class="portada-foto-harmonized">
+    </div>
+
+    <div class="portada-apilada-footer">
+        <div class="portada-names-box">LUZ & ALITO</div>
+        <p class="portada-date-formal">15.08.26</p>
+    </div>
+
+    <section id="countdown">
+        <h2 class="section-title">Faltan</h2>
+        <div class="countdown-container">
+            <div class="countdown-item">
+                <span class="countdown-number" id="days">00</span>
+                <span class="countdown-label">Días</span>
+            </div>
+            <div class="countdown-item">
+                <span class="countdown-number" id="hours">00</span>
+                <span class="countdown-label">Hs</span>
+            </div>
+            <div class="countdown-item">
+                <span class="countdown-number" id="minutes">00</span>
+                <span class="countdown-label">Min</span>
+            </div>
+        </div>
+    </section>
+
+    <section id="ubicacion" style="background-color: #fcfcfc;">
+        <h2 class="section-title">Ceremonia y Fiesta</h2>
+        <p class="section-subtitle">Los esperamos para celebrar el amor</p>
+        
+        <div class="location-grid">
+            <div class="location-card">
+                <h3 class="location-title">Ceremonia Religiosa</h3>
+                <p><strong>12:00 PM</strong><br>Santuario Jesus de la Divina Misericordia</p>
+                <br>
+                <a href="https://www.google.com/maps/place/Santuario+Jes%C3%BAs+De+La+Divina+Misericordia/@-34.6218559,-68.3626175,629m/data=!3m2!1e3!4b1!4m6!3m5!1s0x967908223e3d823d:0xdf7e93744d65903f!8m2!3d-34.6218603!4d-68.3600426!16s%2Fg%2F11c0pt0why?entry=ttu&g_ep=EgoyMDI2MDQyMi4wIKXMDSoASAFQAw%3D%3D" target="_blank" class="btn-primary">Ver ubicación</a>
+            </div>
+            
+            <div class="location-card">
+                <h3 class="location-title">La Fiesta</h3>
+                <p><strong>14:00 PM</strong><br>Alto del Algarrobal</p>
+                <br>
+                <a href="https://www.google.com/maps/place/Alto+del+Algarrobal/@-34.6160806,-68.1324859,629m/data=!3m2!1e3!4b1!4m6!3m5!1s0x967855254ad872fb:0x97830271c15e128d!8m2!3d-34.616085!4d-68.129911!16s%2Fg%2F11f13xxnw2entry=ttu&g_ep=EgoyMDI2MDQyMi4wIKXMDSoASAFQAw%3D%3D" target="_blank" class="btn-primary">Ver ubicación</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="galeria">
+        <h2 class="section-title">Nuestra Historia</h2>
+        <p class="section-subtitle">Momentos inolvidables</p>
+        
+        <div class="gallery-grid">
+            <p style="text-align: center; color: #999; grid-column: 1 / -1; font-style: italic;">(Espacio reservado para las fotos de la preboda)</p>
+        </div>
+    </section>
+
+    <section id="detalles" style="background-color: #f9fbfb;">
+        <h2 class="section-title">Detalles</h2>
+        
+        <div style="text-align: center; margin-bottom: 4rem;">
+            <h3 class="location-title">Dress Code</h3>
+            <p>Elegante / Casual Elegante</p>
+        </div>
+
+        <div class="gifts-wrapper">
+            <h2 class="section-title" style="font-size: 2.5rem;">Nuestra Lista de Deseos</h2>
+            <p style="color: #666; max-width: 600px; margin: 0 auto 2rem auto;">
+                Sabemos que la lista es larga porque empezamos de cero. No esperamos que nos regalen la heladera entera (¡aunque no nos ofendemos si pasa! jaja). Si se te ocurrió alguna idea que no está en esta lista, consúltalo con nosotros.
+            </p>
+            <a href="https://intouchcollaboration1.my.canva.site/lista-de-regalos-para-boda-luz-y-alito" target="_blank" class="btn-primary" style="background-color: var(--accent-cyan); border-color: var(--accent-cyan); margin-bottom: 1rem;">
+                Ver Lista de Regalos
+            </a>
+            <p style="font-family: var(--font-script); font-size: 1.5rem; color: var(--primary-navy);">
+                Gracias por ser parte de este comienzo 💙
+            </p>
+        </div>
+    </section>
+
+    <section id="rsvp">
+        <h2 class="section-title">Confirmar Asistencia</h2>
+        <p class="section-subtitle">Por favor, confirma antes del 15 de Julio de 2026</p>
+        
+        <form id="rsvp-form" class="rsvp-form">
+            <div class="form-group">
+                <label for="nombre">Nombre del Representante</label>
+                <input type="text" id="nombre" name="nombre" placeholder="Ej: Familia Gómez" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="personas">Cantidad total de personas que asisten</label>
+                <input type="number" id="personas" name="personas" min="1" placeholder="Ej: 2" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="nombres_invitados">Nombres de todos los asistentes</label>
+                <textarea id="nombres_invitados" name="nombres_invitados" placeholder="Detalla los nombres completos..." required></textarea>
+            </div>
+            
+            <div class="form-group">
+                <label for="menu">Menú Especial</label>
+                <select id="menu" name="menu">
+                    <option value="estandar">Sin restricciones (Menú estándar)</option>
+                    <option value="vegetariano">Vegetariano</option>
+                    <option value="vegano">Vegano</option>
+                    <option value="celiaco">Celíaco</option>
+                    <option value="otros">Otras alergias/restricciones</option>
+                </select>
+                <textarea id="menu_detalles" name="menu_detalles" style="margin-top: 10px;" placeholder="Si marcaste otra opción o hay invitados con diferentes dietas, detállalo aquí..."></textarea>
+            </div>
+            
+            <div class="form-group">
+                <label for="cancion">¿Qué canción no puede faltar en la fiesta?</label>
+                <input type="text" id="cancion" name="cancion" placeholder="Artista - Nombre de la canción">
+            </div>
+            
+            <button type="submit" class="btn-primary" style="width: 100%; background-color: var(--primary-navy); color: white;">Confirmar Asistencia</button>
+        </form>
+    </section>
+
+    <footer style="text-align:center; padding: 3rem 0; font-size: 0.8rem; color: #aaa; background-color: #fcfcfc;">
+        DISEÑADO CON AMOR PARA LUZ Y ALITO <br> 15 . 08 . 2026
+    </footer>
+
+    <audio id="wedding-song" loop>
+        <source src="/static/music/nuestra_cancion.mp3" type="audio/mpeg">
+    </audio>
+    <button id="music-btn" title="Reproducir música">▶️</button>
+
+    <script src="/static/js/script.js"></script>
+</body>
+</html>

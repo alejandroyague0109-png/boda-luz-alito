@@ -1,0 +1,346 @@
+/* static/css/styles.css */
+
+:root {
+    --primary-navy: #1A2E44; 
+    --accent-cyan: #D1F2F9;  
+    --accent-cyan-dark: #8DB9C4; 
+    --text-body: #4A4A4A;    
+    --bg-white: #FCFCFC;     
+    
+    /* Tipografías */
+    --font-script: 'Great Vibes', cursive;
+    --font-serif: 'Cormorant Garamond', serif;
+    --font-sans: 'Montserrat', sans-serif;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--font-sans);
+    color: var(--text-body);
+    margin: 0;
+    background-color: var(--bg-white);
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+/* =========================================
+   NUEVA PORTADA APILADA
+   ========================================= */
+
+.hero {
+    /* Actúa como un pequeño espaciador inicial */
+    height: 10px; 
+    margin-bottom: 2rem;
+}
+
+.portada-apilada-header {
+    text-align: center;
+    padding: 2rem 1rem;
+}
+
+.portada-title-script {
+    font-family: var(--font-script);
+    font-size: 5rem;
+    color: var(--primary-navy);
+    margin: 0;
+    font-weight: normal;
+}
+
+.portada-apilada-foto-container {
+    width: 100%;
+    max-width: 900px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.portada-foto-harmonized {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    display: block;
+    
+    /* Efectos de integración armónica */
+    border-radius: 10px;
+    mask-image: radial-gradient(circle, black 70%, transparent 100%);
+    -webkit-mask-image: radial-gradient(circle, black 70%, transparent 100%);
+}
+
+.portada-apilada-footer {
+    text-align: center;
+    padding: 3rem 1rem 1rem 1rem;
+    background-color: var(--bg-white);
+}
+
+.portada-names-box {
+    display: inline-block;
+    border: 1px solid var(--accent-cyan);
+    padding: 1rem 2.5rem;
+    font-family: var(--font-serif);
+    text-transform: uppercase;
+    letter-spacing: 0.4rem;
+    font-size: 1.2rem;
+    background-color: white; 
+    color: var(--primary-navy);
+}
+
+.portada-date-formal {
+    font-family: var(--font-serif);
+    font-size: 1.8rem;
+    letter-spacing: 0.2rem;
+    color: var(--text-body);
+    margin-top: 1.5rem;
+    margin-bottom: 0;
+}
+
+/* =========================================
+   SECCIONES GENERALES
+   ========================================= */
+section {
+    padding: 5rem 1rem;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.section-title {
+    font-family: var(--font-script);
+    font-size: 3.5rem;
+    color: var(--primary-navy);
+    text-align: center;
+    margin-bottom: 1rem;
+    font-weight: normal;
+}
+
+.section-subtitle {
+    font-family: var(--font-serif);
+    font-size: 1.5rem;
+    color: var(--text-body);
+    text-align: center;
+    margin-bottom: 3rem;
+    font-style: italic;
+}
+
+/* CUENTA REGRESIVA */
+.countdown-container {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    text-align: center;
+}
+
+.countdown-item {
+    display: flex;
+    flex-direction: column;
+}
+
+.countdown-number {
+    font-family: var(--font-serif);
+    font-size: 3rem;
+    color: var(--primary-navy);
+    line-height: 1;
+}
+
+.countdown-label {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1rem;
+    color: var(--accent-cyan-dark);
+    margin-top: 0.5rem;
+}
+
+/* BOTONES */
+.btn-primary {
+    background-color: white;
+    color: var(--primary-navy);
+    padding: 12px 30px;
+    border: 1px solid var(--accent-cyan-dark);
+    border-radius: 0; 
+    cursor: pointer;
+    text-decoration: none;
+    font-family: var(--font-sans);
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1rem;
+    transition: all 0.3s ease;
+    display: inline-block;
+}
+
+.btn-primary:hover {
+    background-color: var(--accent-cyan);
+    color: var(--primary-navy);
+}
+
+/* TARJETAS DE UBICACIÓN */
+.location-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 3rem;
+}
+
+@media(min-width: 768px) {
+    .location-grid { grid-template-columns: 1fr 1fr; }
+}
+
+.location-card {
+    text-align: center;
+    padding: 2rem;
+    background-color: white;
+    border: 1px solid #eee;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+}
+
+.location-title {
+    font-family: var(--font-serif);
+    font-size: 1.8rem;
+    color: var(--primary-navy);
+    margin-bottom: 0.5rem;
+}
+
+/* LISTA DE REGALOS */
+.gifts-wrapper {
+    text-align: center;
+    background-color: white;
+    padding: 3rem;
+    border: 1px solid var(--accent-cyan);
+    position: relative;
+}
+
+.gifts-wrapper p {
+    margin-bottom: 1.5rem;
+}
+
+/* GALERÍA */
+.gallery-grid {
+    display: column;
+    column-count: 2;
+    column-gap: 1rem;
+}
+
+@media(min-width: 768px) {
+    .gallery-grid { column-count: 3; }
+}
+
+.gallery-img {
+    width: 100%;
+    margin-bottom: 1rem;
+    display: block;
+    border-radius: 2px;
+}
+
+/* FORMULARIO RSVP */
+.rsvp-form {
+    background-color: white;
+    padding: 3rem;
+    border: 1px solid #eee;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+}
+
+.form-group {
+    margin-bottom: 2rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-family: var(--font-serif);
+    font-size: 1.1rem;
+    color: var(--primary-navy);
+}
+
+input[type="text"], input[type="number"], textarea, select {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-bottom: 1px solid #ccc;
+    background-color: transparent;
+    font-family: var(--font-sans);
+    font-size: 0.9rem;
+    color: var(--text-body);
+    transition: border-color 0.3s;
+}
+
+input:focus, textarea:focus, select:focus {
+    outline: none;
+    border-bottom: 1px solid var(--accent-cyan-dark);
+}
+
+/* MÚSICA */
+#music-btn {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    background-color: white;
+    border: 1px solid var(--accent-cyan-dark);
+    color: var(--primary-navy);
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 1.2rem;
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+/* =========================================
+   AJUSTES ESPECÍFICOS PARA CELULARES (MOBILE)
+   ========================================= */
+@media (max-width: 600px) {
+    
+    /* Ajustes Portada Apilada */
+    .portada-title-script {
+        font-size: 3.8rem; 
+    }
+    
+    .portada-apilada-foto-container {
+        width: 92%; 
+    }
+
+    .portada-names-box {
+        padding: 0.8rem 1.5rem;
+        font-size: 1rem;
+        letter-spacing: 0.2rem;
+    }
+    
+    .portada-date-formal {
+        font-size: 1.5rem;
+    }
+
+    /* Reducimos márgenes generales */
+    section {
+        padding: 3.5rem 1rem; 
+    }
+
+    .section-title {
+        font-size: 2.8rem; 
+    }
+
+    .countdown-container {
+        gap: 1.2rem; 
+    }
+    
+    .countdown-number {
+        font-size: 2.5rem;
+    }
+
+    .gifts-wrapper {
+        padding: 2rem 1.5rem; 
+    }
+
+    .gifts-wrapper h2.section-title {
+        font-size: 2.2rem !important;
+    }
+
+    #music-btn {
+        bottom: 20px;
+        right: 20px;
+        width: 45px;
+        height: 45px;
+    }
+}
