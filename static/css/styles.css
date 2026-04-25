@@ -373,3 +373,58 @@ input:focus, textarea:focus, select:focus {
         height: 45px;
     }
 }
+
+/* EFECTO DE FONDO CON CORTE DIAGONAL */
+#countdown {
+    position: relative;
+    background: linear-gradient(135deg, var(--primary-navy) 0%, #2c4a6e 100%);
+    padding: 8rem 1rem; /* Más espacio para que el corte luzca */
+    margin-top: 4rem;
+    margin-bottom: 4rem;
+    /* Genera el corte horizontal inclinado */
+    clip-path: polygon(0 15%, 100% 0%, 100% 85%, 0% 100%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.bible-quote-container {
+    margin-top: 3rem;
+    max-width: 600px;
+    text-align: center;
+}
+
+.bible-quote {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: 1.3rem;
+    color: white;
+    opacity: 0.9;
+}
+
+/* CLASES PARA ANIMACIÓN DE APARICIÓN (SCROLL REVEAL) */
+.reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 1s ease-out;
+}
+
+.reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Ajuste para que el contador no se vea apretado en mobile */
+@media (max-width: 600px) {
+    #countdown {
+        clip-path: polygon(0 5%, 100% 0%, 100% 95%, 0% 100%);
+        padding: 6rem 1rem;
+    }
+    .countdown-container {
+        gap: 1rem;
+    }
+    .countdown-number {
+        font-size: 2rem;
+    }
+}

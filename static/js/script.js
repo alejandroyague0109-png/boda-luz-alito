@@ -6,7 +6,15 @@ document.addEventListener('DOMContentLoaded', function() {
     initMusicControl();
 });
 
-// Cuenta Regresiva Elegante
+// static/js/script.js
+
+document.addEventListener('DOMContentLoaded', function() {
+    initCountdown();
+    initRSVPForm();
+    initMusicControl();
+    initScrollReveal(); // Nueva función
+});
+
 function initCountdown() {
     const weddingDate = new Date("August 15, 2026 12:00:00").getTime();
 
@@ -14,20 +22,38 @@ function initCountdown() {
         const now = new Date().getTime();
         const difference = weddingDate - now;
 
-        if (difference < 0) {
-            document.querySelector('.countdown-container').innerHTML = "<h3 class='location-title'>¡Hoy es el gran día!</h3>";
-            return;
-        }
+        if (difference < 0) return;
 
         document.getElementById('days').innerText = Math.floor(difference / (1000 * 60 * 60 * 24));
         document.getElementById('hours').innerText = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
         document.getElementById('minutes').innerText = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+        // SEGUNDOS AGREGADOS
+        document.getElementById('seconds').innerText = Math.floor((difference % (1000 * 60)) / 1000);
     }
 
     update();
     setInterval(update, 1000);
 }
 
+// FUNCIÓN PARA APARICIÓN SUAVE AL DESPLAZARSE
+function initScrollReveal() {
+    const observerOptions = {
+        threshold: 0.15 // Se activa cuando el 15% del elemento es visible
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('active');
+            }
+        });
+    }, observerOptions);
+
+    // Observamos el contador y cualquier otra sección que tenga la clase 'reveal'
+    document.querySelectorAll('.reveal').forEach(section => {
+        observer.observe(section);
+    });
+}
 // Control de Música Minimalista
 function initMusicControl() {
     const musicBtn = document.getElementById('music-btn');
