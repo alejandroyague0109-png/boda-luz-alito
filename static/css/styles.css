@@ -428,3 +428,16 @@ input:focus, textarea:focus, select:focus {
         font-size: 2rem;
     }
 }
+
+/* Estilo para los íconos de ubicación */
+.location-icon {
+    width: 50px;
+    height: 50px;
+    color: var(--accent-cyan-dark); /* Color azul pastel armónico */
+    margin-bottom: 1.5rem;
+    transition: transform 0.3s ease;
+}
+
+.location-card:hover .location-icon {
+    transform: scale(1.1); /* Efecto sutil al pasar el mouse */
+}
