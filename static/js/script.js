@@ -51,44 +51,34 @@ function initScrollReveal() {
     });
 }
 
-// Control de Música Minimalista (Autoplay Forzado)
 function initMusicControl() {
     const musicBtn = document.getElementById('music-btn');
     const audio = document.getElementById('wedding-song');
     
-    // Función central para arrancar la música
-    const tryPlayMusic = () => {
+    // Intentamos reproducir con cualquier interacción
+    const startAudio = () => {
         audio.play().then(() => {
-            // Si el navegador nos deja, cambiamos el ícono y dejamos de insistir
             musicBtn.innerHTML = "⏸️";
-            removeListeners();
-        }).catch(e => {
-            // El navegador bloqueó el autoplay silenciosamente, esperamos la interacción
+            // Una vez que arranca, quitamos los escuchadores para no gastar recursos
+            window.removeEventListener('click', startAudio);
+            window.removeEventListener('touchstart', startAudio);
+            window.removeEventListener('scroll', startAudio);
+        }).catch(() => {
+            // El navegador sigue bloqueando, esperamos la siguiente interacción
         });
     };
 
-    // Quitamos los eventos una vez que la música ya arrancó para ahorrar memoria
-    const removeListeners = () => {
-        document.removeEventListener('click', tryPlayMusic);
-        document.removeEventListener('touchstart', tryPlayMusic);
-        document.removeEventListener('scroll', tryPlayMusic);
-    };
+    // Escuchamos múltiples eventos para asegurar el inicio "automático"
+    window.addEventListener('click', startAudio);
+    window.addEventListener('touchstart', startAudio);
+    window.addEventListener('scroll', startAudio);
 
-    // 1. Intentamos apenas carga la página (funciona a veces en PC)
-    tryPlayMusic();
-
-    // 2. Si falló, la música arrancará al primer toque de pantalla, clic o al hacer scroll
-    document.addEventListener('click', tryPlayMusic);
-    document.addEventListener('touchstart', tryPlayMusic, { passive: true });
-    document.addEventListener('scroll', tryPlayMusic, { passive: true });
-
-    // Comportamiento del botón manual
+    // Control manual del botón
     musicBtn.addEventListener('click', function(e) {
-        e.stopPropagation(); // Evita conflictos con el clic general
+        e.stopPropagation();
         if (audio.paused) {
             audio.play();
             musicBtn.innerHTML = "⏸️";
-            removeListeners(); // Si lo prendió manual, dejamos de espiar
         } else {
             audio.pause();
             musicBtn.innerHTML = "▶️";
