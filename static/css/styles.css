@@ -240,22 +240,106 @@ section {
     margin-bottom: 1.5rem;
 }
 
-/* GALERÍA */
-.gallery-grid {
-    display: column;
-    column-count: 2;
-    column-gap: 1rem;
+/* =========================================
+   GALERÍA MARQUEE (DESPLAZAMIENTO INFINITO)
+   ========================================= */
+.galeria-bg-blue {
+    background-color: var(--primary-navy);
+    padding: 6rem 0; /* Arriba y abajo mucho espacio, laterales 0 para que toque los bordes */
+    max-width: 100%; /* Ocupa toda la pantalla a lo ancho */
+    overflow: hidden;
 }
 
-@media(min-width: 768px) {
-    .gallery-grid { column-count: 3; }
-}
-
-.gallery-img {
+.marquee-container {
     width: 100%;
-    margin-bottom: 1rem;
-    display: block;
-    border-radius: 2px;
+    overflow: hidden;
+    margin-bottom: 2rem;
+    position: relative;
+}
+
+/* Efecto de cristal esmerilado en los bordes para una aparición/desaparición súper suave */
+.marquee-container::before,
+.marquee-container::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    width: 150px;
+    height: 100%;
+    z-index: 2;
+    pointer-events: none; /* Para que no bloqueen los clics si pones links */
+}
+.marquee-container::before {
+    left: 0;
+    background: linear-gradient(to right, var(--primary-navy), transparent);
+}
+.marquee-container::after {
+    right: 0;
+    background: linear-gradient(to left, var(--primary-navy), transparent);
+}
+
+.marquee-track {
+    display: flex;
+    gap: 1.5rem;
+    width: max-content;
+}
+
+/* Control de velocidad (35 segundos por vuelta, puedes subir o bajar este número) */
+.track-left {
+    animation: scroll-left 35s linear infinite;
+}
+.track-right {
+    transform: translateX(-50%);
+    animation: scroll-right 35s linear infinite;
+}
+
+/* Tamaños de imagen: Fijan la altura, el ancho se adapta solo para no deformarse */
+.marquee-track img {
+    border-radius: 8px;
+    object-fit: cover;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.3); /* Sombra elegante */
+    transition: transform 0.4s ease;
+}
+
+.marquee-track img:hover {
+    transform: scale(1.02); /* Pequeño zoom al pasar el mouse */
+}
+
+/* Altura para fotos Apaisadas (Horizontales) */
+.img-horizontal {
+    height: 280px;
+    width: auto;
+}
+
+/* Altura para fotos Retrato (Verticales) */
+.img-vertical {
+    height: 380px;
+    width: auto;
+}
+
+/* Los Motores de Animación */
+@keyframes scroll-left {
+    0% { transform: translateX(0); }
+    /* Se desplaza exactamente la mitad del contenedor (el grupo original) más la mitad del gap */
+    100% { transform: translateX(calc(-50% - 0.75rem)); } 
+}
+
+@keyframes scroll-right {
+    0% { transform: translateX(calc(-50% - 0.75rem)); }
+    100% { transform: translateX(0); }
+}
+
+/* Ajustes Mobile para la Galería */
+@media (max-width: 600px) {
+    .galeria-bg-blue {
+        padding: 4rem 0;
+    }
+    .img-horizontal { height: 180px; }
+    .img-vertical { height: 260px; }
+    
+    .marquee-container::before,
+    .marquee-container::after {
+        width: 40px; /* Sombras laterales más cortas en celular */
+    }
 }
 
 /* FORMULARIO RSVP */
