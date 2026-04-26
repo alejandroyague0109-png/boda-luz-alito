@@ -79,7 +79,8 @@ section {
 .reveal {
     opacity: 0;
     transform: translateY(30px);
-    transition: all 1s ease-out;
+    /* CAMBIO: Animamos solo opacidad y posición, protegiendo el corte diagonal */
+    transition: opacity 1s ease-out, transform 1s ease-out;
 }
 
 .reveal.active {
@@ -334,6 +335,45 @@ section {
     border: none; 
     max-width: 600px; /* Centra y limita el ancho del formulario */
     margin: 0 auto; 
+}
+
+/* --- ENTRADAS DEL FORMULARIO RSVP --- */
+.rsvp-form input[type="text"], 
+.rsvp-form input[type="number"], 
+.rsvp-form textarea, 
+.rsvp-form select {
+    width: 100%;         /* Ocupa todo el ancho disponible */
+    display: block;      /* Se comporta como un bloque sólido */
+    padding: 15px 0;     /* Más espacio vertical para que sea cómodo tocar con el dedo */
+    border: none;
+    border-bottom: 2px solid #eee; /* Línea base más visible */
+    background-color: transparent;
+    font-family: var(--font-sans);
+    font-size: 1rem;
+    color: var(--text-body);
+    transition: all 0.3s ease;
+    border-radius: 0;    /* Evita bordes redondeados nativos en iOS */
+    -webkit-appearance: none; /* Limpia estilos por defecto de buscadores */
+}
+
+/* Efecto al hacer clic para escribir */
+.rsvp-form input:focus, 
+.rsvp-form textarea:focus, 
+.rsvp-form select:focus {
+    outline: none;
+    border-bottom: 2px solid var(--accent-cyan-dark);
+    padding-left: 10px; /* Pequeño desplazamiento elegante al activar */
+}
+
+/* Ajuste para las etiquetas (Labels) */
+.form-group label {
+    display: block;
+    text-align: left;    /* Alinea el texto a la izquierda */
+    margin-bottom: 8px;
+    font-family: var(--font-serif);
+    font-weight: 600;
+    color: var(--primary-navy);
+    font-size: 1.1rem;
 }
 
 .form-group { margin-bottom: 2rem; }
