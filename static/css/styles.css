@@ -315,15 +315,28 @@ section {
 }
 .gifts-content { max-width: 600px; margin: 0 auto; }
 
-.rsvp-form { background-color: white; padding: 3rem; border: 1px solid #eee; box-shadow: 0 4px 15px rgba(0,0,0,0.03); }
-.form-group { margin-bottom: 2rem; }
-.form-group label { display: block; margin-bottom: 0.5rem; font-family: var(--font-serif); font-size: 1.1rem; color: var(--primary-navy); }
-input[type="text"], input[type="number"], textarea, select {
-    width: 100%; padding: 12px; border: none; border-bottom: 1px solid #ccc; background-color: transparent;
-    font-family: var(--font-sans); font-size: 0.9rem; color: var(--text-body); transition: border-color 0.3s;
+/* NUEVO: Fondo azul para RSVP */
+.rsvp-bg-blue {
+    position: relative; 
+    background: linear-gradient(135deg, var(--primary-navy) 0%, #2c4a6e 100%);
+    padding: 8rem 1rem 6rem 1rem; 
+    margin-top: 2rem; 
+    /* Corte diagonal arriba, recto abajo para unir con el footer */
+    clip-path: polygon(0 15%, 100% 0%, 100% 100%, 0% 100%); 
 }
-input:focus, textarea:focus, select:focus { outline: none; border-bottom: 1px solid var(--accent-cyan-dark); }
 
+/* Formulario mejorado tipo "Tarjeta flotante" */
+.rsvp-form { 
+    background-color: white; 
+    padding: 3rem; 
+    border-radius: 12px; /* Bordes redondeados más suaves */
+    box-shadow: 0 15px 40px rgba(0,0,0,0.2); /* Sombra elegante */
+    border: none; 
+    max-width: 600px; /* Centra y limita el ancho del formulario */
+    margin: 0 auto; 
+}
+
+.form-group { margin-bottom: 2rem; }
 /* =========================================
    MÚSICA
    ========================================= */
@@ -348,12 +361,18 @@ input:focus, textarea:focus, select:focus { outline: none; border-bottom: 1px so
     section { padding: 3.5rem 1rem; }
     .section-title { font-size: 2.8rem; }
 
-    /* Contador y Regalos (Corte diagonal) */
+    /* Contador, Regalos y RSVP (Corte diagonal) */
     #countdown, .regalos-bg-blue {
         clip-path: polygon(0 5%, 100% 0%, 100% 95%, 0% 100%); padding: 6rem 1rem;
     }
-    .countdown-container { gap: 1.2rem; }
-    .countdown-number { font-size: 2.5rem; }
+    
+    .rsvp-bg-blue {
+        clip-path: polygon(0 5%, 100% 0%, 100% 100%, 0% 100%); padding: 6rem 1rem 4rem 1rem;
+    }
+
+    .rsvp-form {
+        padding: 2rem 1.5rem; /* Menos espacio interno en celulares */
+    }
     
     /* Guarda Animada */
     .guarda-animada-container { padding: 1.5rem 0; }
