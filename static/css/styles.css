@@ -731,3 +731,72 @@ input:focus, textarea:focus, select:focus {
         border-color: transparent white transparent transparent;
     }
 }
+
+/* =========================================
+   GUANDA ANIMADA (CARRUSEL INFINITO)
+   ========================================= */
+.guarda-animada-container {
+    width: 100%;
+    overflow: hidden;
+    background-color: var(--bg-white); /* O el color de fondo que desees */
+    padding: 2rem 0; /* Espacio arriba y abajo */
+    position: relative;
+}
+
+/* Efecto de cristal esmerilado en los bordes para una aparición/desaparición súper suave */
+.guarda-animada-container::before,
+.guarda-animada-container::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    width: 150px;
+    height: 100%;
+    z-index: 2;
+    pointer-events: none; /* Para que no bloqueen los clics si pones links */
+}
+.guarda-animada-container::before {
+    left: 0;
+    background: linear-gradient(to right, var(--bg-white), transparent); /* Desvanece a la izquierda */
+}
+.guarda-animada-container::after {
+    right: 0;
+    background: linear-gradient(to left, var(--bg-white), transparent); /* Desvanece a la derecha */
+}
+
+.marquee-track {
+    display: flex;
+    gap: 1rem; /* Espacio entre imágenes */
+    width: max-content; /* Se ajusta al ancho total de las imágenes */
+    
+    /* Control de velocidad (puedes subir o bajar este número en segundos) */
+    animation: scroll-left-guarda 25s linear infinite;
+}
+
+.img-guarda {
+    height: 150px; /* Fija la altura, el ancho se adapta solo */
+    width: auto;
+    border-radius: 6px;
+    object-fit: cover;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1); /* Sombra elegante y sutil */
+}
+
+/* El Motor de Animación para el bucle infinito */
+@keyframes scroll-left-guarda {
+    0% { transform: translateX(0); }
+    /* Se desplaza exactamente la mitad del contenedor (el grupo original) */
+    100% { transform: translateX(calc(-50% - 0.5rem)); } 
+}
+
+/* Ajustes Mobile para la Guarda Animada */
+@media (max-width: 600px) {
+    .guarda-animada-container {
+        padding: 1.5rem 0;
+    }
+    .img-guarda { 
+        height: 100px; /* Altura más baja en celulares */
+    }
+    .guarda-animada-container::before,
+    .guarda-animada-container::after {
+        width: 60px; /* Sombras laterales más cortas en celular */
+    }
+}
