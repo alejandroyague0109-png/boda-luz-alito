@@ -521,3 +521,129 @@ input:focus, textarea:focus, select:focus {
     background-color: white;
     color: var(--primary-navy);
 }
+
+/* =========================================
+   ITINERARIO (TIMELINE VERTICAL)
+   ========================================= */
+.itinerario-container {
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 1rem;
+}
+
+.timeline {
+    position: relative;
+    margin-top: 3rem;
+}
+
+/* La línea vertical */
+.timeline::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 20px; /* Posición para celulares */
+    height: 100%;
+    width: 2px;
+    background: var(--accent-cyan-dark);
+    opacity: 0.5;
+}
+
+.timeline-item {
+    position: relative;
+    margin-bottom: 2.5rem;
+    padding-left: 60px; /* Deja espacio para el ícono en celulares */
+}
+
+.timeline-item:last-child {
+    margin-bottom: 0;
+}
+
+.timeline-icon {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 42px;
+    height: 42px;
+    background: var(--bg-white);
+    border: 2px solid var(--accent-cyan-dark);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    z-index: 1;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+.timeline-content {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+    border: 1px solid #eee;
+    position: relative;
+}
+
+/* Pequeña flecha apuntando al ícono */
+.timeline-content::before {
+    content: '';
+    position: absolute;
+    top: 15px;
+    left: -10px;
+    border-style: solid;
+    border-width: 10px 10px 10px 0;
+    border-color: transparent white transparent transparent;
+}
+
+.timeline-content h4 {
+    font-family: var(--font-serif);
+    color: var(--primary-navy);
+    font-size: 1.3rem;
+    margin-top: 0;
+    margin-bottom: 0.5rem;
+}
+
+.timeline-content p {
+    margin: 0;
+    font-size: 0.95rem;
+    color: var(--text-body);
+    font-style: italic;
+    line-height: 1.5;
+}
+
+/* Diseño alternado para pantallas grandes (Tablets y Desktop) */
+@media (min-width: 768px) {
+    .timeline::before {
+        left: 50%;
+        transform: translateX(-50%);
+    }
+    .timeline-item {
+        width: 50%;
+        padding-left: 0;
+        padding-right: 40px; /* Deja espacio a la derecha */
+        text-align: right;
+    }
+    .timeline-item:nth-child(even) {
+        margin-left: auto;
+        padding-right: 0;
+        padding-left: 40px; /* Deja espacio a la izquierda */
+        text-align: left;
+    }
+    .timeline-icon {
+        left: 50%;
+        transform: translateX(-50%);
+    }
+    /* Arreglar la flecha para que apunte al centro en ambos lados */
+    .timeline-item:nth-child(odd) .timeline-content::before {
+        left: auto;
+        right: -10px;
+        border-width: 10px 0 10px 10px;
+        border-color: transparent transparent transparent white;
+    }
+    .timeline-item:nth-child(even) .timeline-content::before {
+        left: -10px;
+        border-width: 10px 10px 10px 0;
+        border-color: transparent white transparent transparent;
+    }
+}

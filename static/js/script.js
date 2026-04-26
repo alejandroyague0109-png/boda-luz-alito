@@ -35,7 +35,7 @@ function initCountdown() {
     setInterval(update, 1000);
 }
 
-// FUNCIÓN PARA APARICIÓN SUAVE AL DESPLAZARSE
+// FUNCIÓN PARA APARICIÓN SUAVE AL DESPLAZARSE (IDA Y VUELTA)
 function initScrollReveal() {
     const observerOptions = {
         threshold: 0.15 // Se activa cuando el 15% del elemento es visible
@@ -44,12 +44,16 @@ function initScrollReveal() {
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
+                // Entra a la pantalla -> Aparece suavemente
                 entry.target.classList.add('active');
+            } else {
+                // Sale de la pantalla -> Desaparece suavemente
+                entry.target.classList.remove('active');
             }
         });
     }, observerOptions);
 
-    // Observamos el contador y cualquier otra sección que tenga la clase 'reveal'
+    // Observamos todas las secciones que tengan la clase 'reveal'
     document.querySelectorAll('.reveal').forEach(section => {
         observer.observe(section);
     });
