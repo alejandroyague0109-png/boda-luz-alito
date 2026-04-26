@@ -78,9 +78,14 @@ section {
 /* CLASES PARA ANIMACIÓN DE APARICIÓN (SCROLL REVEAL) */
 .reveal {
     opacity: 0;
-    transform: translateY(30px);
-    /* CAMBIO: Animamos solo opacidad y posición, protegiendo el corte diagonal */
-    transition: opacity 1s ease-out, transform 1s ease-out;
+    /* Redujimos un poco el desplazamiento para que sea más sutil y rápido */
+    transform: translateY(20px); 
+    /* Forzamos que SOLO anime opacidad y desplazamiento. 
+       ¡NUNCA animará el clip-path! */
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+    /* Mantén estas dos líneas para forzar la aceleración por hardware */
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
 }
 
 .reveal.active {
@@ -387,6 +392,68 @@ section {
 }
 
 /* =========================================
+   DRESS CODE (ETIQUETA)
+   ========================================= */
+.dress-code-container {
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 3rem 2rem;
+    background: white;
+    border: 1px solid var(--accent-cyan);
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.03);
+}
+
+.dress-code-main {
+    font-family: var(--font-serif);
+    font-size: 1.5rem;
+    color: var(--primary-navy);
+    text-transform: uppercase;
+    letter-spacing: 0.3rem;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+}
+
+.reserved-colors {
+    margin-top: 2.5rem;
+    padding-top: 2.5rem;
+    border-top: 1px dashed var(--accent-cyan-dark);
+}
+
+.reserved-title {
+    font-family: var(--font-sans);
+    font-size: 1.1rem;
+    color: var(--primary-navy);
+    margin-bottom: 1.5rem;
+    font-weight: 500;
+}
+
+.color-palette {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1.5rem 2rem;
+}
+
+.color-item {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-family: var(--font-sans);
+    font-size: 0.95rem;
+    color: var(--text-body);
+}
+
+.color-dot {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    display: inline-block;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+}
+
+/* =========================================
    TODOS LOS AJUSTES PARA CELULARES
    ========================================= */
 @media (max-width: 600px) {
@@ -429,4 +496,9 @@ section {
     .gifts-wrapper { padding: 2rem 1.5rem; }
     .gifts-wrapper h2.section-title { font-size: 2.2rem !important; }
     #music-btn { bottom: 20px; right: 20px; width: 45px; height: 45px; }
+
+    /* Ajustes Dress Code */
+    .dress-code-container { padding: 2rem 1rem; }
+    .dress-code-main { font-size: 1.2rem; letter-spacing: 0.2rem; }
+    .color-palette { flex-direction: column; align-items: center; gap: 1rem; }
 }
