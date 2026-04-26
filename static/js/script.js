@@ -4,14 +4,6 @@ document.addEventListener('DOMContentLoaded', function() {
     initCountdown();
     initRSVPForm();
     initMusicControl();
-});
-
-// static/js/script.js
-
-document.addEventListener('DOMContentLoaded', function() {
-    initCountdown();
-    initRSVPForm();
-    initMusicControl();
     initScrollReveal(); // Nueva función
 });
 
