@@ -50,31 +50,48 @@ function initScrollReveal() {
         observer.observe(section);
     });
 }
-// Control de Música Minimalista
+
+// Control de Música Minimalista (Autoplay Forzado)
 function initMusicControl() {
     const musicBtn = document.getElementById('music-btn');
     const audio = document.getElementById('wedding-song');
     
-    // El audio no suele reproducirse automáticamente por bloqueos del navegador.
-    // Se activará cuando el usuario haga clic en la pantalla por primera vez.
-    let audioStarted = false;
-    
-    document.body.addEventListener('click', function() {
-        if (!audioStarted) {
-            audio.play().catch(e => console.log("Autoplay prevenido"));
+    // Función central para arrancar la música
+    const tryPlayMusic = () => {
+        audio.play().then(() => {
+            // Si el navegador nos deja, cambiamos el ícono y dejamos de insistir
             musicBtn.innerHTML = "⏸️";
-            audioStarted = true;
-        }
-    }, { once: true });
+            removeListeners();
+        }).catch(e => {
+            // El navegador bloqueó el autoplay silenciosamente, esperamos la interacción
+        });
+    };
 
+    // Quitamos los eventos una vez que la música ya arrancó para ahorrar memoria
+    const removeListeners = () => {
+        document.removeEventListener('click', tryPlayMusic);
+        document.removeEventListener('touchstart', tryPlayMusic);
+        document.removeEventListener('scroll', tryPlayMusic);
+    };
+
+    // 1. Intentamos apenas carga la página (funciona a veces en PC)
+    tryPlayMusic();
+
+    // 2. Si falló, la música arrancará al primer toque de pantalla, clic o al hacer scroll
+    document.addEventListener('click', tryPlayMusic);
+    document.addEventListener('touchstart', tryPlayMusic, { passive: true });
+    document.addEventListener('scroll', tryPlayMusic, { passive: true });
+
+    // Comportamiento del botón manual
     musicBtn.addEventListener('click', function(e) {
-        e.stopPropagation(); // Evita que dispare el evento del body
+        e.stopPropagation(); // Evita conflictos con el clic general
         if (audio.paused) {
             audio.play();
-            musicBtn.innerHTML = "⏸️"; 
+            musicBtn.innerHTML = "⏸️";
+            removeListeners(); // Si lo prendió manual, dejamos de espiar
         } else {
             audio.pause();
-            musicBtn.innerHTML = "▶️"; 
+            musicBtn.innerHTML = "▶️";
         }
     });
 }
