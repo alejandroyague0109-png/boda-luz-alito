@@ -503,3 +503,36 @@ section {
     .dress-code-main { font-size: 1.2rem; letter-spacing: 0.2rem; }
     .color-palette { flex-direction: column; align-items: flex-start; gap: 1rem; }
 }
+
+/* =========================================
+   PANTALLA DE BIENVENIDA (SOBRE DIGITAL)
+   ========================================= */
+.welcome-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--primary-navy);
+    z-index: 9999; /* Por encima de absolutamente todo */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    transition: opacity 1s ease-in-out, visibility 1s ease-in-out;
+}
+
+/* Esta clase se añadirá con JS para ocultar la pantalla suavemente */
+.welcome-overlay.hidden {
+    opacity: 0;
+    visibility: hidden;
+}
+
+.welcome-content {
+    animation: pulse-soft 2s infinite alternate;
+}
+
+@keyframes pulse-soft {
+    from { transform: scale(0.98); }
+    to { transform: scale(1.02); }
+}

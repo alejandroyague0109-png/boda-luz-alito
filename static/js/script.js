@@ -51,29 +51,28 @@ function initScrollReveal() {
     });
 }
 
+// Control de Música y Pantalla de Bienvenida
 function initMusicControl() {
     const musicBtn = document.getElementById('music-btn');
     const audio = document.getElementById('wedding-song');
+    const welcomeOverlay = document.getElementById('welcome-overlay');
+    const openBtn = document.getElementById('open-invitation');
     
-    // Intentamos reproducir con cualquier interacción
-    const startAudio = () => {
+    // Al hacer clic en "Abrir Invitación"
+    openBtn.addEventListener('click', function() {
+        // 1. Iniciamos la música (¡ahora sí el navegador lo permite!)
         audio.play().then(() => {
             musicBtn.innerHTML = "⏸️";
-            // Una vez que arranca, quitamos los escuchadores para no gastar recursos
-            window.removeEventListener('click', startAudio);
-            window.removeEventListener('touchstart', startAudio);
-            window.removeEventListener('scroll', startAudio);
-        }).catch(() => {
-            // El navegador sigue bloqueando, esperamos la siguiente interacción
-        });
-    };
+        }).catch(e => console.log("Error al reproducir:", e));
+        
+        // 2. Ocultamos la pantalla de bienvenida con el efecto de desvanecimiento
+        welcomeOverlay.classList.add('hidden');
+        
+        // 3. Opcional: hacemos un scroll automático al tope de la página por si acaso
+        window.scrollTo(0, 0);
+    });
 
-    // Escuchamos múltiples eventos para asegurar el inicio "automático"
-    window.addEventListener('click', startAudio);
-    window.addEventListener('touchstart', startAudio);
-    window.addEventListener('scroll', startAudio);
-
-    // Control manual del botón
+    // Control manual del botón flotante de música
     musicBtn.addEventListener('click', function(e) {
         e.stopPropagation();
         if (audio.paused) {
