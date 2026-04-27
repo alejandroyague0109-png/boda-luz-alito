@@ -18,9 +18,15 @@ else:
     print("WARNING: Credenciales de Supabase no encontradas.")
     supabase = None
 
+# RUTA PARA LA VERSIÓN EN ESPAÑOL (La que ya tienes)
 @app.route('/')
 def index():
     return render_template('index.html')
+
+# NUEVA RUTA PARA LA VERSIÓN EN ALEMÁN
+@app.route('/de')
+def index_de():
+    return render_template('index_de.html')
 
 @app.route('/api/rsvp', methods=['POST'])
 def rsvp():
