@@ -187,23 +187,32 @@ section {
 .bible-quote-container { margin-top: 3rem; max-width: 600px; text-align: center; }
 .bible-quote { font-family: var(--font-serif); font-style: italic; font-size: 1.3rem; color: white; opacity: 0.9; }
 
-/* Calendario */
-.calendar-widget { display: flex; flex-direction: column; align-items: center; margin-top: 4rem; }
 /* =========================================
    CALENDARIO ELEGANTE (FONDO BLANCO)
    ========================================= */
+.calendar-widget { 
+    display: flex; 
+    flex-direction: column; 
+    align-items: center; 
+    margin-top: 4rem; 
+    /* Nuevas reglas: Define el ancho perfecto para ambos */
+    width: 100%; 
+    max-width: 350px; 
+}
+
 .elegant-calendar {
-    background: white; /* Fondo sólido blanco */
+    width: 100%; /* Obliga al calendario a ocupar todo el ancho */
+    background: white; 
     border: none;
     padding: 1.5rem 2rem;
     border-radius: 12px;
-    margin-bottom: 2rem;
-    box-shadow: 0 15px 40px rgba(0,0,0,0.2); /* Sombra para que despegue del fondo azul */
+    margin-bottom: 1.5rem; /* Separación con el botón */
+    box-shadow: 0 15px 40px rgba(0,0,0,0.2); 
 }
 
 .calendar-header {
     font-family: var(--font-serif);
-    color: var(--primary-navy); /* Letras azules */
+    color: var(--primary-navy); 
     text-align: center;
     letter-spacing: 0.2rem;
     font-size: 1.3rem;
@@ -216,30 +225,52 @@ section {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
     gap: 0.6rem;
-    color: var(--text-body); /* Números en gris oscuro elegante */
+    color: var(--text-body); 
     font-family: var(--font-sans);
     font-size: 0.9rem;
     text-align: center;
 }
 
+/* Espacio para cada número */
+.calendar-grid span { 
+    width: 32px; /* Un poco más grandes para aprovechar el nuevo espacio */
+    height: 32px; 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    margin: 0 auto; /* Mantiene los números centrados en su columna expandida */
+}
+
 /* Letras de los días (D, L, M, M, J, V, S) */
 .calendar-grid span:nth-child(-n+7) {
     font-weight: bold;
-    color: var(--primary-navy); /* Azul marino para los días */
+    color: var(--primary-navy); 
     margin-bottom: 0.5rem;
 }
 
 /* El círculo que resalta el 15 */
 .highlight-date {
-    background-color: var(--primary-navy); /* Círculo azul marino */
-    color: white !important; /* Número 15 en blanco */
+    background-color: var(--primary-navy); 
+    color: white !important; 
     border-radius: 50%;
     font-weight: 600;
     box-shadow: 0 4px 10px rgba(26, 46, 68, 0.3);
 }
-.btn-calendar { background-color: transparent; color: white; border-color: rgba(255,255,255,0.5); margin-bottom: 1rem; }
-.btn-calendar:hover { background-color: white; color: var(--primary-navy); }
 
+/* Botón del calendario */
+.btn-calendar { 
+    width: 100%; /* Obliga al botón a ser igual de ancho que el calendario */
+    text-align: center; /* Centra el texto */
+    background-color: transparent; 
+    color: white; 
+    border-color: rgba(255,255,255,0.5); 
+    margin-bottom: 1rem; 
+}
+
+.btn-calendar:hover { 
+    background-color: white; 
+    color: var(--primary-navy); 
+}
 /* =========================================
    UBICACIÓN
    ========================================= */
