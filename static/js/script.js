@@ -58,33 +58,39 @@ function initMusicControl() {
     const welcomeOverlay = document.getElementById('welcome-overlay');
     const openBtn = document.getElementById('open-invitation');
     
+    // Íconos SVG ultra elegantes (reemplazan a los emojis del celular)
+    const iconPlay = `<svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>`;
+    const iconPause = `<svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>`;
+
+    // Ponemos el ícono de play por defecto al cargar
+    if(musicBtn) musicBtn.innerHTML = iconPlay;
+    
     // Al hacer clic en "Abrir Invitación"
-    openBtn.addEventListener('click', function() {
-        // 1. Iniciamos la música (¡ahora sí el navegador lo permite!)
-        audio.play().then(() => {
-            musicBtn.innerHTML = "⏸️";
-        }).catch(e => console.log("Error al reproducir:", e));
-        
-        // 2. Ocultamos la pantalla de bienvenida con el efecto de desvanecimiento
-        welcomeOverlay.classList.add('hidden');
-        
-        // 3. Opcional: hacemos un scroll automático al tope de la página por si acaso
-        window.scrollTo(0, 0);
-    });
+    if(openBtn) {
+        openBtn.addEventListener('click', function() {
+            audio.play().then(() => {
+                musicBtn.innerHTML = iconPause; // Cambia a pausa elegantemente
+            }).catch(e => console.log("Error al reproducir:", e));
+            
+            welcomeOverlay.classList.add('hidden');
+            window.scrollTo(0, 0);
+        });
+    }
 
     // Control manual del botón flotante de música
-    musicBtn.addEventListener('click', function(e) {
-        e.stopPropagation();
-        if (audio.paused) {
-            audio.play();
-            musicBtn.innerHTML = "⏸️";
-        } else {
-            audio.pause();
-            musicBtn.innerHTML = "▶️";
-        }
-    });
+    if(musicBtn) {
+        musicBtn.addEventListener('click', function(e) {
+            e.stopPropagation();
+            if (audio.paused) {
+                audio.play();
+                musicBtn.innerHTML = iconPause;
+            } else {
+                audio.pause();
+                musicBtn.innerHTML = iconPlay;
+            }
+        });
+    }
 }
-
 // Envío del Formulario
 function initRSVPForm() {
     const form = document.getElementById('rsvp-form');
