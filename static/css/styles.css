@@ -565,3 +565,65 @@ section {
     from { transform: scale(0.98); }
     to { transform: scale(1.02); }
 }
+
+/* Pausar la galería al interactuar */
+.marquee-track:hover,
+.marquee-track:active {
+    animation-play-state: paused;
+}
+
+/* Cursor de "lupa" para indicar que se puede hacer clic */
+.marquee-track img {
+    cursor: zoom-in;
+}
+
+/* =========================================
+   VISOR DE FOTOS (LIGHTBOX)
+   ========================================= */
+.lightbox {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background-color: rgba(10, 20, 35, 0.95); /* Azul marino muy oscuro y transparente */
+    z-index: 10000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+}
+
+.lightbox.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.lightbox img {
+    max-width: 90%;
+    max-height: 85vh;
+    border-radius: 8px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+    transform: scale(0.95);
+    transition: transform 0.3s ease;
+}
+
+.lightbox.active img {
+    transform: scale(1);
+}
+
+.lightbox-close {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    color: white;
+    font-size: 3rem;
+    font-family: var(--font-sans);
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+.lightbox-close:hover {
+    color: var(--accent-cyan);
+}

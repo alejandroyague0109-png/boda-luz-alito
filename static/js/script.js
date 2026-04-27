@@ -5,6 +5,7 @@ document.addEventListener('DOMContentLoaded', function() {
     initRSVPForm();
     initMusicControl();
     initScrollReveal(); // Nueva función
+    initLightbox()
 });
 
 function initCountdown() {
@@ -127,5 +128,33 @@ function initRSVPForm() {
             submitBtn.innerText = "Confirmar Asistencia";
             submitBtn.disabled = false;
         });
+    });
+}
+
+// Función para el Visor de Fotos (Lightbox)
+function initLightbox() {
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightbox-img');
+    const closeBtn = document.querySelector('.lightbox-close');
+    const galleryImages = document.querySelectorAll('.marquee-track img');
+
+    // Abrir visor al tocar una foto
+    galleryImages.forEach(img => {
+        img.addEventListener('click', function() {
+            lightboxImg.src = this.src; // Copia la ruta de la foto tocada
+            lightbox.classList.add('active');
+        });
+    });
+
+    // Cerrar visor al tocar la "X"
+    closeBtn.addEventListener('click', () => {
+        lightbox.classList.remove('active');
+    });
+
+    // Cerrar visor al tocar cualquier parte del fondo oscuro
+    lightbox.addEventListener('click', (e) => {
+        if (e.target === lightbox) {
+            lightbox.classList.remove('active');
+        }
     });
 }
