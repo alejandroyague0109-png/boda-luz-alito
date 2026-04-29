@@ -35,7 +35,7 @@ def index_tarjeta():
 
 # RUTA PARA LA VERSIÓN CON PAGO DE TARJETA
 @app.route('/brindis')
-def index_tarjeta():
+def index_brindis():
     return render_template('index_brindis.html')
 
 @app.route('/api/rsvp', methods=['POST'])
