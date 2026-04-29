@@ -28,6 +28,16 @@ def index():
 def index_de():
     return render_template('index_de.html')
 
+# RUTA PARA LA VERSIÓN CON PAGO DE TARJETA
+@app.route('/tarjeta')
+def index_tarjeta():
+    return render_template('index_tarjeta.html')
+
+# RUTA PARA LA VERSIÓN CON PAGO DE TARJETA
+@app.route('/brindis')
+def index_tarjeta():
+    return render_template('index_brindis.html')
+
 @app.route('/api/rsvp', methods=['POST'])
 def rsvp():
     if not supabase:
