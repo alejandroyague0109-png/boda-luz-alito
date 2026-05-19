@@ -34,9 +34,12 @@
         </div>
 
         <div class="table-section">
-            <h2 class="table-section-title">Lista de Invitados (RSVP)</h2>
+            <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #f4f7f9; margin-bottom: 1.5rem; padding-bottom: 0.75rem;">
+                <h2 class="table-section-title" style="border: none; margin: 0; padding: 0;">Lista de Invitados (RSVP)</h2>
+                <button onclick="exportTableToCSV('tabla-rsvp', 'Luz_y_Alito_Invitados.csv')" class="btn-primary" style="padding: 8px 15px; font-size: 0.8rem; border-radius: 4px;">📥 Descargar Excel</button>
+            </div>
             <div class="table-responsive">
-                <table class="admin-table">
+                <table id="tabla-rsvp" class="admin-table">
                     <thead>
                         <tr>
                             <th>Representante</th>
@@ -68,9 +71,12 @@
         </div>
 
         <div class="table-section" style="margin-top: 4rem;">
-            <h2 class="table-section-title">Regalos Reservados</h2>
+            <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #f4f7f9; margin-bottom: 1.5rem; padding-bottom: 0.75rem;">
+                <h2 class="table-section-title" style="border: none; margin: 0; padding: 0;">Regalos Reservados</h2>
+                <button onclick="exportTableToCSV('tabla-regalos', 'Luz_y_Alito_Regalos.csv')" class="btn-primary" style="padding: 8px 15px; font-size: 0.8rem; border-radius: 4px;">📥 Descargar Excel</button>
+            </div>
             <div class="table-responsive" style="max-width: 700px; margin: 0 auto;">
-                <table class="admin-table">
+                <table id="tabla-regalos" class="admin-table">
                     <thead>
                         <tr>
                             <th>Regalo Seleccionado</th>
@@ -95,5 +101,6 @@
 
     </div>
 
+    <script src="/static/js/script.js"></script>
 </body>
 </html>

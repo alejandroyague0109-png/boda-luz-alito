@@ -282,3 +282,44 @@ function initGiftRegistry() {
         }
     }
 }
+
+// Función para exportar tablas HTML a Excel (CSV)
+function exportTableToCSV(tableID, filename) {
+    const table = document.getElementById(tableID);
+    let csv = [];
+    
+    // Recorremos las filas de la tabla
+    for (let i = 0; i < table.rows.length; i++) {
+        let row = [], cols = table.rows[i].querySelectorAll('td, th');
+        
+        for (let j = 0; j < cols.length; j++) {
+            // Limpiamos el texto (quitamos saltos de línea y emojis si los hay)
+            let data = cols[j].innerText.replace(/(\r\n|\n|\r)/gm, " ").replace(/👤 /g, "");
+            // Escapamos las comillas dobles
+            data = data.replace(/"/g, '""');
+            // Encerramos en comillas para que las comas internas no rompan las columnas
+            row.push('"' + data + '"');
+        }
+        // Usamos punto y coma porque el Excel en español suele usar la coma para decimales
+        csv.push(row.join(';'));
+    }
+
+    downloadCSV(csv.join('\n'), filename);
+}
+
+function downloadCSV(csv, filename) {
+    let csvFile;
+    let downloadLink;
+
+    // Agregamos el BOM (Byte Order Mark) para que Excel reconozca los acentos (UTF-8)
+    const BOM = "\uFEFF";
+    csvFile = new Blob([BOM + csv], {type: "text/csv;charset=utf-8;"});
+
+    downloadLink = document.createElement("a");
+    downloadLink.download = filename;
+    downloadLink.href = window.URL.createObjectURL(csvFile);
+    downloadLink.style.display = "none";
+    document.body.appendChild(downloadLink);
+    downloadLink.click();
+    document.body.removeChild(downloadLink);
+}
