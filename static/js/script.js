@@ -5,7 +5,8 @@ document.addEventListener('DOMContentLoaded', function() {
     initRSVPForm();
     initMusicControl();
     initScrollReveal(); // Nueva función
-    initLightbox()
+    initLightbox();
+    initGiftRegistry();
 });
 
 function initCountdown() {
