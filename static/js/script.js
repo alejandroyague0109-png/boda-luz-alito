@@ -176,7 +176,7 @@ function initGiftRegistry() {
                 });
             }
         })
-        .error(err => console.error("Error cargando estados de regalos:", err));
+        .catch(err => console.error("Error cargando estados de regalos:", err)); // <--- ¡CAMBIAR .error POR .catch!
 
     // 2. Escuchar clics para RESERVAR
     actionButtons.forEach(btn => {
