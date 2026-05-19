@@ -65,9 +65,6 @@ def rsvp():
         print(f"Error guardando RSVP: {e}")
         return jsonify({"success": False, "error": "Error del servidor"}), 500
 
-if __name__ == '__main__':
-    app.run(debug=True, port=int(os.environ.get("PORT", 5000)))
-
 # RUTA PARA LA LISTA DE REGALOS (DISEÑO CANVA NATIVO)
 @app.route('/regalos')
 def lista_regalos():
@@ -124,3 +121,6 @@ def cancelar_regalo():
     except Exception as e:
         print(f"Error cancelando reserva: {e}")
         return jsonify({"success": False, "error": str(e)}), 500
+
+if __name__ == '__main__':
+    app.run(debug=True, port=int(os.environ.get("PORT", 5000)))

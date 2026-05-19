@@ -10,8 +10,10 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 function initCountdown() {
-    const weddingDate = new Date("August 15, 2026 12:00:00").getTime();
+    const daysEl = document.getElementById('days');
+    if (!daysEl) return; // <--- LÍNEA SALVAVIDAS: Si no hay contador, salir.
 
+    const weddingDate = new Date("August 15, 2026 12:00:00").getTime();
     function update() {
         const now = new Date().getTime();
         const difference = weddingDate - now;
@@ -96,6 +98,8 @@ function initMusicControl() {
 // Envío del Formulario
 function initRSVPForm() {
     const form = document.getElementById('rsvp-form');
+    if (!form) return; // <--- LÍNEA SALVAVIDAS: Si no hay formulario, salir.
+
     form.addEventListener('submit', function(e) {
         e.preventDefault();
         
@@ -135,6 +139,8 @@ function initRSVPForm() {
 // Función para el Visor de Fotos (Lightbox)
 function initLightbox() {
     const lightbox = document.getElementById('lightbox');
+    if (!lightbox) return; // <--- LÍNEA SALVAVIDAS: Si no hay lightbox, salir.
+
     const lightboxImg = document.getElementById('lightbox-img');
     const closeBtn = document.querySelector('.lightbox-close');
     const galleryImages = document.querySelectorAll('.marquee-track img');
