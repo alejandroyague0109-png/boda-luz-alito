@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel de Control | Luz & Alito</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600&family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/styles.css">
+</head>
+<body style="background-color: #f4f7f9; padding: 2rem 1rem;">
+
+    <div class="admin-container">
+        
+        <div class="admin-header">
+            <h1 class="admin-title">Panel de Control</h1>
+            <p>Resumen en tiempo real del casamiento</p>
+        </div>
+
+        <div class="admin-cards-grid">
+            <div class="admin-card">
+                <h3>{{ total_invitados }}</h3>
+                <p>Invitados Confirmados</p>
+            </div>
+            <div class="admin-card">
+                <h3>{{ total_familias }}</h3>
+                <p>Grupos/Familias</p>
+            </div>
+            <div class="admin-card">
+                <h3>{{ total_regalos }}</h3>
+                <p>Regalos Reservados</p>
+            </div>
+        </div>
+
+        <div class="table-section">
+            <h2 class="table-section-title">Lista de Invitados (RSVP)</h2>
+            <div class="table-responsive">
+                <table class="admin-table">
+                    <thead>
+                        <tr>
+                            <th>Representante</th>
+                            <th>Asisten</th>
+                            <th>Nombres / Edades</th>
+                            <th>Menú</th>
+                            <th>Detalles Alergias</th>
+                            <th>Canción sugerida</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for rsvp in rsvps %}
+                        <tr>
+                            <td><strong>{{ rsvp.name_representative }}</strong></td>
+                            <td style="text-align: center;"><span class="badge-count">{{ rsvp.number_guests }}</span></td>
+                            <td>{{ rsvp.other_names }}</td>
+                            <td><span class="badge-menu">{{ rsvp.menu_type | capitalize }}</span></td>
+                            <td class="text-muted">{{ rsvp.dietary_restrictions if rsvp.dietary_restrictions else '-' }}</td>
+                            <td class="text-italic">"{{ rsvp.must_play_song if rsvp.must_play_song else '-' }}"</td>
+                        </tr>
+                        {% else %}
+                        <tr>
+                            <td colspan="6" style="text-align: center; color: #999;">Ningún invitado ha confirmado asistencia todavía.</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="table-section" style="margin-top: 4rem;">
+            <h2 class="table-section-title">Regalos Reservados</h2>
+            <div class="table-responsive" style="max-width: 700px; margin: 0 auto;">
+                <table class="admin-table">
+                    <thead>
+                        <tr>
+                            <th>Regalo Seleccionado</th>
+                            <th>Reservado por</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for gift in gifts %}
+                        <tr>
+                            <td><strong>{{ gift.gift_name }}</strong></td>
+                            <td><span class="badge-user">👤 {{ gift.reserved_by }}</span></td>
+                        </tr>
+                        {% else %}
+                        <tr>
+                            <td colspan="2" style="text-align: center; color: #999;">Aún no se han reservado regalos de la lista.</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+
+</body>
+</html>
