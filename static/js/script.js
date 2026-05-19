@@ -158,3 +158,120 @@ function initLightbox() {
         }
     });
 }
+
+function initGiftRegistry() {
+    const actionButtons = document.querySelectorAll('.btn-gift-action');
+    const cancelButtons = document.querySelectorAll('.btn-gift-cancel');
+
+    if (actionButtons.length === 0) return; // Si no estamos en la página de regalos, salir
+
+    // 1. Cargar estados de la base de datos al entrar a la página
+    fetch('/api/regalos/estado')
+        .then(res => res.json())
+        .then(data => {
+            if (data.success && data.reservas) {
+                data.reservas.forEach(reserva => {
+                    marcarComoReservadoEnPantalla(reserva.gift_id, reserva.reserved_by);
+                });
+            }
+        })
+        .error(err => console.error("Error cargando estados de regalos:", err));
+
+    // 2. Escuchar clics para RESERVAR
+    actionButtons.forEach(btn => {
+        btn.addEventListener('click', function(e) {
+            e.preventDefault();
+            const giftId = this.getAttribute('data-gift-id');
+            
+            // Pedimos el nombre al usuario
+            const name = prompt("Para reservar este regalo, por favor ingresá tu nombre o el de tu familia:");
+            
+            if (!name || name.trim() === "") {
+                alert("Reserva cancelada. Es necesario ingresar un nombre.");
+                return;
+            }
+
+            this.innerText = "Reservando...";
+            this.disabled = true;
+
+            fetch('/api/regalos/reservar', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ gift_id: giftId, reserved_by: name })
+            })
+            .then(res => res.json())
+            .then(res => {
+                if (res.success) {
+                    alert("¡Muchas gracias! El regalo ha sido reservado para ustedes.");
+                    marcarComoReservadoEnPantalla(giftId, name);
+                } else {
+                    alert("Hubo un error o el regalo ya fue reservado por otra persona.");
+                    this.innerText = "Quiero reservar este regalo";
+                    this.disabled = false;
+                }
+            })
+            .catch(err => {
+                console.error(err);
+                alert("Error de conexión. Intentá de nuevo.");
+                this.innerText = "Quiero reservar este regalo";
+                this.disabled = false;
+            });
+        });
+    });
+
+    // 3. Escuchar clics para CANCELAR / SUSPENDER
+    cancelButtons.forEach(btn => {
+        btn.addEventListener('click', function(e) {
+            e.preventDefault();
+            const giftId = this.getAttribute('data-gift-id');
+            
+            if (!confirm("¿Estás seguro de que querés suspender la reserva de este regalo? Volverá a estar disponible para todos.")) {
+                return;
+            }
+
+            fetch('/api/regalos/cancelar', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ gift_id: giftId })
+            })
+            .then(res => res.json())
+            .then(res => {
+                if (res.success) {
+                    alert("La reserva ha sido suspendida.");
+                    marcarComoDisponibleEnPantalla(giftId);
+                } else {
+                    alert("No se pudo suspender la reserva. Intentá de nuevo.");
+                }
+            });
+        });
+    });
+
+    // Funciones auxiliares para modificar la interfaz visual
+    function marcarComoReservadoEnPantalla(giftId, nombrePersona) {
+        const actionBtn = document.querySelector(`.btn-gift-action[data-gift-id="${giftId}"]`);
+        const cancelBtn = document.querySelector(`.btn-gift-cancel[data-gift-id="${giftId}"]`);
+        
+        if (actionBtn) {
+            actionBtn.innerText = `Reservado por ${nombrePersona}`;
+            actionBtn.className = "btn-gift-action btn-gift-grey"; // Cambia estilo a gris elegante
+            actionBtn.disabled = true;
+        }
+        if (cancelBtn) {
+            cancelBtn.style.display = "block"; // Muestra el botón de suspender reserva
+        }
+    }
+
+    function marcarComoDisponibleEnPantalla(giftId) {
+        const actionBtn = document.querySelector(`.btn-gift-action[data-gift-id="${giftId}"]`);
+        const cancelBtn = document.querySelector(`.btn-gift-cancel[data-gift-id="${giftId}"]`);
+        
+        if (actionBtn) {
+            actionBtn.innerText = "Quiero reservar este regalo";
+            actionBtn.className = "btn-gift-action btn-gift-blue"; // Vuelve a color azul celeste
+            actionBtn.disabled = false;
+        }
+        if (cancelBtn) {
+            cancelBtn.style.display = "none"; // Oculta el botón de suspender reserva
+        }
+    }
+}

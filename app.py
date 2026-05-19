@@ -67,3 +67,60 @@ def rsvp():
 
 if __name__ == '__main__':
     app.run(debug=True, port=int(os.environ.get("PORT", 5000)))
+
+# RUTA PARA LA LISTA DE REGALOS (DISEÑO CANVA NATIVO)
+@app.route('/regalos')
+def lista_regalos():
+    return render_template('lista_regalos.html')
+
+@app.route('/api/regalos/estado', methods=['GET'])
+def obtener_estado_regalos():
+    if not supabase:
+        return jsonify([]), 500
+    try:
+        # Traemos todas las reservas actuales
+        response = supabase.table('gift_reservations').select('gift_id', 'reserved_by').execute()
+        return jsonify({"success": True, "reservas": response.data})
+    except Exception as e:
+        print(f"Error obteniendo estado de regalos: {e}")
+        return jsonify({"success": False, "error": str(e)}), 500
+
+@app.route('/api/regalos/reservar', methods=['POST'])
+def reservar_regalo():
+    if not supabase:
+        return jsonify({"success": False, "error": "DB no configurada"}), 500
+    try:
+        data = request.json
+        gift_id = data.get('gift_id')
+        reserved_by = data.get('reserved_by')
+
+        if not gift_id or not reserved_by:
+            return jsonify({"success": False, "error": "Datos incompletos"}), 400
+
+        insert_data = {
+            "gift_id": gift_id,
+            "reserved_by": reserved_by
+        }
+        
+        supabase.table('gift_reservations').insert(insert_data).execute()
+        return jsonify({"success": True})
+    except Exception as e:
+        print(f"Error reservando regalo: {e}")
+        return jsonify({"success": False, "error": "Este regalo ya podría estar reservado"}), 500
+
+@app.route('/api/regalos/cancelar', methods=['POST'])
+def cancelar_regalo():
+    if not supabase:
+        return jsonify({"success": False, "error": "DB no configurada"}), 500
+    try:
+        data = request.json
+        gift_id = data.get('gift_id')
+
+        if not gift_id:
+            return jsonify({"success": False, "error": "Falta el ID del regalo"}), 400
+
+        supabase.table('gift_reservations').delete().eq('gift_id', gift_id).execute()
+        return jsonify({"success": True})
+    except Exception as e:
+        print(f"Error cancelando reserva: {e}")
+        return jsonify({"success": False, "error": str(e)}), 500
