@@ -185,7 +185,13 @@ def panel_control():
             "suscripciones_plataformas": "1 año de suscripción a plataformas",
             "combo_todos_dias": "Combo de todos los días",
             "combo_desayuno": "Combo desayuno argentino",
-            "combo_cine": "Combo cine en casa"
+            "combo_cine": "Combo cine en casa", # <- Asegurate de poner coma al final de esta
+            "cortadora_fiambre": "Minicortadora de fiambre",
+            "biblia_funda": "Biblia con funda linda",
+            "liturgia_horas": "Liturgia de las horas",
+            "bolsas_dormir": "Bolsas de dormir x2",
+            "colchon_inflable": "Colchón inflable 2 plazas",
+            "sillas_camping": "Sillas de camping x2"
         }
         
         # Asignamos el nombre traducido a cada regalo
